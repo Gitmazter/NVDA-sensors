@@ -13,11 +13,11 @@ fn main() -> Result<(), nvml_wrapper::error::NvmlError> {
         let fan_speed_2 = device.fan_speed(1)?; // Currently 17% on my system
         let memory_info = device.memory_info()?; // Currently 1.63/6.37 GB used on my system
         let power_limit = device.enforced_power_limit()?; // 275k milliwatts on my system
-        // let power_draw = device.power_usage()?; // 30W on my system
-    
+        // let power_draw = device.power_usage()?; // 30W on my system (this reads bugs out the crate)
+             
         // read temperature
         let sensor_gpu: TemperatureSensor = TemperatureSensor::Gpu;
-        let temp_board = device.temperature(sensor_gpu);
+        let temp_board = device.temperature(sensor_gpu);  // 42°C on my system
         // clock types
         let clock = Clock::Graphics;
         let clock2 = Clock::Graphics;
@@ -33,7 +33,7 @@ fn main() -> Result<(), nvml_wrapper::error::NvmlError> {
         println!("Brand: {:?}", brand);
         println!("Fan 1 Speed: {:?}%", fan_speed_1);
         println!("Fan 2 Speed: {:?}%", fan_speed_2);
-        println!("Temperature Board: {:?}", temp_board); // 30°C on my system
+        println!("Temperature Board: {:?}", temp_board);
         println!("GPU Max Clock: {:?}", gpu_max_clock);
         println!("GPU Current Clock: {:?}", gpu_current_clock);
         println!("Power Limit: {:?}", power_limit);
