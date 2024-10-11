@@ -14,10 +14,11 @@ fn main() -> Result<(), nvml_wrapper::error::NvmlError> {
         let memory_info = device.memory_info()?; // Currently 1.63/6.37 GB used on my system
         let power_limit = device.enforced_power_limit()?; // 275k milliwatts on my system
         // let power_draw = device.power_usage()?; // 30W on my system (this reads bugs out the crate)
-             
+
         // read temperature
         let sensor_gpu: TemperatureSensor = TemperatureSensor::Gpu;
         let temp_board = device.temperature(sensor_gpu);  // 42°C on my system
+
         // clock types
         let clock = Clock::Graphics;
         let clock2 = Clock::Graphics;
@@ -25,10 +26,10 @@ fn main() -> Result<(), nvml_wrapper::error::NvmlError> {
         let memory_clock2 = Clock::Memory;
         
         // read clock speeds
-        let gpu_max_clock = device.max_clock_info(clock)?;
-        let gpu_current_clock = device.clock_info(clock2);
-        let memory_max_clock = device.max_clock_info(memory_clock)?;
-        let memory_current_clock = device.clock_info(memory_clock2);
+        let gpu_max_clock = device.max_clock_info(clock)?; // 3105 MHz on my system
+        let gpu_current_clock = device.clock_info(clock2); // 2505 MHz on my system
+        let memory_max_clock = device.max_clock_info(memory_clock)?; // 8501 MHz on my system
+        let memory_current_clock = device.clock_info(memory_clock2); // 8500 MHz on my system
     
         println!("Brand: {:?}", brand);
         println!("Fan 1 Speed: {:?}%", fan_speed_1);
@@ -37,7 +38,7 @@ fn main() -> Result<(), nvml_wrapper::error::NvmlError> {
         println!("GPU Max Clock: {:?}", gpu_max_clock);
         println!("GPU Current Clock: {:?}", gpu_current_clock);
         println!("Power Limit: {:?}", power_limit);
-        // println!("Power Draw: {:?}", power_draw);
+        // println!("Power Draw: {:?}", power_draw); (commented due to read bug)
         println!("Memory Max Clock: {:?}", memory_max_clock);
         println!("Memory Current Clock: {:?}", memory_current_clock);
         println!("vRam Info: {:?}", memory_info);
