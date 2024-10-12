@@ -1,9 +1,10 @@
 [package]
-name = "nvda-sensor"
+name = "eframe_test"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+eframe = "0.29.1"
 nvml-wrapper = "0.10.0"
 serde_json = "1.0.128"
 strum = "0.26.3"
