@@ -13,8 +13,7 @@ fn main() -> Result<(), nvml_wrapper::error::NvmlError> {
         let fan_speed_2 = device.fan_speed(1)?; // Currently 17% on my system
         let memory_info = device.memory_info()?; // Currently 1.63/6.37 GB used on my system
         let power_limit = device.enforced_power_limit()?; // 275k milliwatts on my system
-        // let power_draw = device.power_usage()?; // 30W on my system (not supported on my card?)
-
+        // let power_draw = device.power_usage()?; // Not Implemented yet
         // read temperature
         let sensor_gpu: TemperatureSensor = TemperatureSensor::Gpu;
         let temp_board = device.temperature(sensor_gpu);  // 42°C on my system
@@ -38,7 +37,7 @@ fn main() -> Result<(), nvml_wrapper::error::NvmlError> {
         println!("GPU Max Clock: {:?}", gpu_max_clock);
         println!("GPU Current Clock: {:?}", gpu_current_clock);
         println!("Power Limit: {:?}", power_limit);
-        // println!("Power Draw: {:?}", power_draw); // (not supported on my card?)
+        // println!("Power Draw: {:?}", power_draw); /// Not Implemented yet
         println!("Memory Max Clock: {:?}", memory_max_clock);
         println!("Memory Current Clock: {:?}", memory_current_clock);
         println!("vRam Info: {:?}", memory_info);

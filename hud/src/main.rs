@@ -1,11 +1,13 @@
+// Author: Andzi 
+// Date: 2021-10-10
+// Description: A simple hud for displaying Nvidia GPU info using eGui eFrame and nvml_wrapper
 
-
-
+extern crate nvml_wrapper;
+extern crate eframe;
 mod nvda;
-use std::any::type_name;
 
-use nvda::{nvda, NvdaInfo};
-use eframe::{egui::{Context, Pos2, Rgba, Vec2, ViewportBuilder, WidgetText, Window}, Result};
+use nvda::{nvda, match_brand};
+use eframe::{egui::{Context, Pos2, Rgba, Vec2, ViewportBuilder, Window}, Result};
 
 #[derive(Default)]
 struct  MyApp {}
@@ -16,11 +18,6 @@ impl MyApp{
         Default::default()
     }
 }
-
-fn type_of<T>(_: &T) -> &'static str {
-    type_name::<T>()
-}
-
 
 impl eframe::App for MyApp {
     fn clear_color(&self, _visuals: &eframe::egui::Visuals) -> [f32; 4] {
@@ -37,8 +34,7 @@ impl eframe::App for MyApp {
                 return;
             }
         };
-
-        let brand_clone = "Nvidia Gpu";
+        let brand = match_brand(nvda_info.brand);
         let fan_1_clone = String::from("Fan 1 Speed: ") + &nvda_info.fan_speed_1.to_string() + "%";
         let fan_2_clone = String::from("Fan 2 Speed: ") + &nvda_info.fan_speed_2.to_string() + "%";
         let memory_used_clone = String::from("Memory Used: ") + &nvda_info.memory_used.to_string().split_at(4).0 + " GB";
@@ -53,8 +49,8 @@ impl eframe::App for MyApp {
         let window_size = Vec2::new(200.0, 300.0);   
         let default_pos = Pos2::new(50.0, 50.0);
         Window::new("AndziHud").auto_sized().title_bar(false).collapsible(false).default_size(window_size).default_pos(default_pos).fade_in(true).show(ctx, |ui| {
-            ui.label("Andzi Hud v0.0.1");
-                ui.label(brand_clone);
+            ui.label("Andzi Hud v 0.0.1");
+                ui.label(brand);
                 ui.label(fan_1_clone);
                 ui.label(fan_2_clone);
                 ui.label(memory_used_clone);
