@@ -77,7 +77,8 @@ fn main() -> Result<(), eframe::Error> {
     .with_inner_size(size)
     .with_position(position)
     .with_mouse_passthrough(true)
-    .with_fullscreen(true);
+    .with_fullscreen(true)
+    .with_active(true);
 
     eframe::run_native(
         "My App",

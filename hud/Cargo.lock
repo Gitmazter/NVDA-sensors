@@ -3,6 +3,17 @@
 version = 3
 
 [[package]]
+name = "AndziHud"
+version = "0.0.1"
+dependencies = [
+ "eframe",
+ "nvml-wrapper",
+ "serde_json",
+ "strum",
+ "strum_macros",
+]
+
+[[package]]
 name = "ab_glyph"
 version = "0.2.29"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -878,17 +889,6 @@ dependencies = [
  "winapi",
  "windows-sys 0.52.0",
  "winit",
-]
-
-[[package]]
-name = "eframe_test"
-version = "0.1.0"
-dependencies = [
- "eframe",
- "nvml-wrapper",
- "serde_json",
- "strum",
- "strum_macros",
 ]
 
 [[package]]
